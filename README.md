@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 map chart notes
 ---------------
 
@@ -15,3 +16,11 @@ Results are printed on the command line.
 
 3. In the browser go to http://localhost:3000
 
+=======
+# AstroScope-Web
+AstroScope for the web
+
+Features: 
+- Create, email, print and save astro charts
+- View transits or progressions animation
+>>>>>>> 587e8c02c17cb800d3951b2d4f6745cb2c67a847
