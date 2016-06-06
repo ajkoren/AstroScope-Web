@@ -1,0 +1,81 @@
+<html>
+<head>
+    <title>Create an account</title>
+    <script type="text/javascript" src="lib/jquery.js"></script>
+    <script type="text/javascript" src="lib/jquery.cookie.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var show = false;
+            
+            $('#showPW').click(function() {
+                show = !show;
+                if (show) {
+                    $('#showPW').text('Hide Password');
+                    $('#pw').attr('type', 'text');
+                } else {
+                    $('#showPW').text('Show Password');
+                    $('#pw').attr('type', 'password');
+                }
+                return false;
+            });
+            
+            var LoggedCookie = $.cookie("asLogged");
+            if (LoggedCookie == -3) {
+                var email = $.cookie("email");
+                $('#exists').text(
+                    'Account ' + email + ' is already in use. ' +
+                    'Please go back to the login page ' +
+                    'in order to log in or reset the password for this account');
+            } else if (LoggedCookie < 0) {
+                $('#exists').text(
+                    'Account could not be created. ' +
+                    'Please try again later.');
+            }
+        });
+        
+    </script>
+</head>
+<body>
+        <form id="sendId" action="register" method="post">
+            <table>
+                <tr>
+                    <td colspan="5"><h1><center>Create an account</center></h1></td>
+                </tr>
+                <tr>
+                    <td colspan="5" id='exists' style="color:red"></td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><a href="login.html">Back to login</a></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>Name</td>
+                    <td><input type="text" name="name" id="name" 
+                        required minlength="2" maxlength="24"></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>Email</td>
+                    <td><input type="text" name="email" id="email" 
+                        required minlength="6" maxlength="24"></td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td rowspan="2"><input type="submit" style="height:30px;width:140px;"
+                        value="Submit"></td>
+                </tr>
+                <tr>
+                    <td><button id="showPW" style="width:140px;">
+                        Show Password</button></td>
+                    <td>Password (6-24 characters)</td>
+                    <td><input type="password" name="pw" id="pw" 
+                        required minlength="6" maxlength="24"></td>
+                </tr>
+            </table>
+        </form>
+    <p>&nbsp;</p>
+    <a href="terms.html">email and password use</a>
+</body>
+</html>

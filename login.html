@@ -1,0 +1,109 @@
+<html>
+<head>
+    <title>Send</title>
+    <link rel="stylesheet" type="text/css" href="dropdown.css">
+    <link rel="stylesheet" type="text/css" href="home.css">
+    <script type="text/javascript" src="lib/jquery.js"></script>
+    <script type="text/javascript" src="lib/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/header.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var show = false;
+            
+            $('button').click(function() {
+                show = !show;
+                if (show) {
+                    $('#showPW').text('Hide Password');
+                    $('#pw').attr('type', 'text');
+                } else {
+                    $('#showPW').text('Show Password');
+                    $('#pw').attr('type', 'password');
+                }
+                return false;
+            });
+            
+            var loggedCookie = $.cookie("asLogged");
+            if (loggedCookie < 0) {
+                $('#messageId').text("Login failed. Please try again, " +
+                                     "or click 'forgot my password'");
+            }
+            
+            //$('#submitId').click(function() {
+            //    var dest = $.cookie("dest");
+            //    if (dest === "/") {
+            //        $('#sendId').action = "login";
+            //    }
+            //    $('#sendId').method = "post";
+            //    $('#sendId').submit();
+            //});
+        });
+    </script>
+</head>
+<body>
+    <form id="sendId" action="login" method="post">
+        <table>
+        <tr>
+            <td colspan="2">
+                <button class="home" id="homeId" 
+                        style="width: 100" onclick="location.href='/'">AstroScope</button></td>
+            <td colspan="2"><h3><div id="pageHeaderId"></div></h3></td>
+            <td colspan="2" id="nameId"></td>
+            <td><div class="dropdown">
+                <button onclick="dropdownClicked()" class="dropbtn" id="ddMenuId" 
+                    style="width: 200">Login</button>
+                    <div id="menuId" class="dropdown-content">
+                        <a id="menuChartListId" href="/list.html">Chart List</a>
+                        <a id="menuChartListId" href="/select2.html">Match partners</a>
+                        <a id="menuSettingsId" href="/settings.html">Settings</a>
+                        <a id="menuLogoutId" onclick="logClicked(true)" href="#">Logout</a>
+                    </div>
+                </div></td>
+            </tr>
+            <tr><td>&nbsp;</td></tr>
+            <tr>
+                <td colspan="5"><h1><center>Login</center></h1></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="4" style="color:red" id="messageId"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>User email</td>
+                <td><input type="text" name="email" id="email" 
+                    required minlength="6" maxlength="24"></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td rowspan="2"><input type="submit" style="height:30px;width:140px;"
+                    value="Submit" id="submitId"></td>
+            </tr>
+            <tr>
+                <td><button id="showPW" style="width:140px;">
+                    Show Password</button></td>
+                <td>Password</td>
+                <td><input type="password" name="pw" id="pw"
+                    required minlength="6" maxlength="24"></td>
+            </tr>
+            <tr><td>&nbsp;</td></tr>
+            <tr><td>&nbsp;</td></tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td><a href="resetPassword.html">Forgot my password</a></td>
+            </tr>
+            <tr><td colspan="3">send an email with a link to reset password.</td></tr>
+            <tr><td colspan="3">also look into passport.js (linkes on node.js page) and how it might help.</td></tr>
+            <tr><td>&nbsp;</td></tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td><a href="account.html">Create an account</a></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

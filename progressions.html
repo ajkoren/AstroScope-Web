@@ -1,0 +1,204 @@
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <title>Progressions Chart</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="dropdown.css">
+    <link rel="stylesheet" type="text/css" href="home.css">
+    <script type="text/javascript" src="lib/jquery.js"></script>
+    <script type="text/javascript" src="lib/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/header.js"></script>
+    <script type="text/javascript" src="lib/phaser.min.js"></script>
+    <script type="text/javascript" src="js/lib.js"></script>
+    <script type="text/javascript" src="js/natal.js"></script>
+    <script type="text/javascript" src="js/transitory.js"></script>
+    <script type="text/javascript" src="js/local_planets.js"></script>
+</head>
+
+<body>
+    <table width=100%>
+        <tr>
+            <td colspan="1">
+            <button class="home" id="homeId" 
+                    style="width: 100" onclick="location.href='/'">AstroScope</button></td>
+            <td colspan="4"><h1><center id="pageHeaderId">Progressions: </center></h1></td>
+            <td><span style="padding-left:125px"></td>
+            <td><div class="dropdown">
+                <button onclick="dropdownClicked()" class="dropbtn" id="ddMenuId" 
+                    style="width: 200">Login</button>
+                <div id="menuId" class="dropdown-content">
+                    <a id="menuChartListId" href="/list.html">Chart List</a>
+                    <a id="menuChartListId" href="/select2.html">Match partners</a>
+                    <a id="menuSettingsId" href="/settings.html">Settings</a>
+                    <a id="menuLogoutId" onclick="logClicked(true)" href="#">Logout</a>
+                </div>
+            </div></td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+    </table>
+    
+    <table width="100%">
+        <thead>
+            <tr>
+                <td>Planet</td>
+                <td>Longitude in sign</td>
+                <td>Zodiac&nbsp;sign&nbsp;</td>
+            </tr>
+        </thead>
+        <tr>
+            <td id="sunTdId">Sun</td>
+            <td><textarea id="sunLong30Id" disabled='disabled'></textarea></td>
+            <td><textarea id="sunSignId" disabled='disabled'></textarea></td>
+            <td rowspan="21" colspan="5">
+                <div id="game_div">
+                <!--<img src="./img/zodiac-f.gif" />-->
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Mercury</td>
+            <td><textarea id="mercuryLong30Id" disabled='disabled'></textarea></td>
+            <td><textarea id="mercurySignId" disabled='disabled'></textarea></td>
+       </tr>
+        <tr>
+            <td>Venus</td>
+            <td><textarea id="venusLong30Id" disabled='disabled'></textarea></td>
+            <td><textarea id="venusSignId" disabled='disabled'></textarea></td>
+        </tr>
+        <tr>
+            <td>Moon</td>
+            <td><textarea id="moonLong30Id" disabled='disabled'></textarea></td>
+            <td><textarea id="moonSignId" disabled='disabled'></textarea></td>
+        </tr>
+        <tr>
+            <td>Mars</td>
+            <td><textarea id="marsLong30Id" disabled='disabled'></textarea></td>
+            <td><textarea id="marsSignId" disabled='disabled'></textarea></td>
+        </tr>
+        <tr>
+            <td>Jupiter</td>
+            <td><textarea id="jupiterLong30Id" disabled='disabled'></textarea></td>
+            <td><textarea id="jupiterSignId" disabled='disabled'></textarea></td>
+        </tr>
+        <tr>
+            <td>Saturn</td>
+            <td><textarea id="saturnLong30Id" disabled='disabled'></textarea></td>
+            <td><textarea id="saturnSignId" disabled='disabled'></textarea></td>
+        </tr>
+        <tr>
+            <td>Uranus</td>
+            <td><textarea id="uranusLong30Id" disabled='disabled'></textarea></td>
+            <td><textarea id="uranusSignId" disabled='disabled'></textarea></td>
+        </tr>
+        <tr>
+            <td>Neptune</td>
+            <td><textarea id="neptuneLong30Id" disabled='disabled'></textarea></td>
+            <td><textarea id="neptuneSignId" disabled='disabled'></textarea></td>
+        </tr>
+        <tr>
+            <td>Pluto</td>
+            <td><textarea id="plutoLong30Id" disabled='disabled'></textarea></td>
+            <td><textarea id="plutoSignId" disabled='disabled'></textarea></td>
+        </tr>
+        <tr>
+            <td>AC</td>
+            <td><textarea id="acLong30Id" disabled='disabled'></textarea></td>
+            <!--<td><textarea id="acSignId" disabled='disabled'></textarea></td>-->
+            <td><textarea id="acId" disabled='disabled'></textarea></td>
+        </tr>
+        <tr>
+            <td>MC</td>
+            <td><textarea id="mcLong30Id" disabled='disabled'></textarea></td>
+            <!--<td><textarea id="mcSignId" disabled='disabled'></textarea></td>-->
+            <td><textarea id="mcId" disabled='disabled'></textarea></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="checkbox" id="natalAspectsId"
+                    onclick="natalAspectsClicked(this)">
+                Show natal aspects
+            </td>
+            <td colspan="1">
+                <center><button style="height:30px;width=500px;" 
+                            onclick="window.history.back()">Go Back</button>
+                </center>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <input type="checkbox" id="tpAspectsId"
+                    onclick="tpAspectsClicked(this)">
+                Show progression aspects <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(for moon: phases only)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <input type="checkbox" id="fastPlanetsId"
+                    onclick="fastPlanetsClicked(this)">
+                Show fast planets
+            </td>
+        </tr>
+        <tr>
+            <td>Progressed</td>
+            <td colspan="2">
+                <textarea id="simDate" disabled='disabled'></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>Calculated</td>
+            <td colspan="2">
+                <textarea id="calcDate" disabled='disabled'></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <input type="radio" id="radioDateId" name="radioDate" value="auto"
+                       onclick="radioDateClicked(this)" checked>
+                Auto date count
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="radio" id="radioDateId" name="radioDate" value="manual"
+                       onclick="radioDateClicked(this)">
+                Manual date
+            </td>
+            <td>
+                <input type="button" id="setManualDateId" value="      Set      "
+                       onclick="setManualDate()">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <input type="radio" id="radioDateId" name="radioDate" value="slider"
+                       onclick="radioDateClicked(this)">
+                Slider date
+            </td>
+        </tr>
+    </table>
+    
+    <table width="100%" border="1">
+        <tr>
+        <tr>
+            <td colspan="3">
+                <input type="radio" id="rangeDaysId" 
+                       name="radioSliderRange" value="weeks" checked>
+                100 weeks range
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </td>
+            <td colspan="20" rowspan="2">
+                <input type="range" id="slider1" class="slider-width" min="0" max="100" 
+                       oninput="showsSliderValue(this.value)">
+            </td>
+        <tr>
+            <td colspan="3">
+                <input type="radio" id="rangeWeeksId"
+                       name="radioSliderRange" value="months">
+                100 months (~8 years)
+            </td>
+        </tr>
+    </table>
+    <p></p>
+
+</body>
+</html>

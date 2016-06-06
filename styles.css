@@ -1,0 +1,98 @@
+
+html {
+    padding: 0;
+    margin: 0;
+}
+
+canvas {
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid gray;
+    border-left: 1px solid gray;
+    border-bottom: 1px solid white;
+    border-right: 1px solid white;
+    background: white;
+}
+
+td {
+    vertical-align: middle;
+    /*width: 200px;*/
+}
+
+input[type=button] {
+    border-style: outset;
+    border-width: 1px;
+    border-color: white;
+}
+
+input[type=button]:active {
+    border-style: inset;
+    border-width: 1px;
+    border-color: white;
+}
+
+input[type=slider]:active {
+    border-style: inset;
+    border-width: 1px;
+    border-color: blue;
+    background-color: red;
+    background: red;
+    color:#ff0000
+}
+
+textarea {
+    padding: 0;
+    margin: 0;
+    border-style: inset;
+    border-width: 1px;
+    box-sizing: border-box;
+    width: 125;
+    resize: none;
+    height: 20px;
+}
+
+textarea:disabled {
+    background-color: lightgray;
+}
+
+select {
+    width: 100%;
+}
+
+thead tr td {
+    text-align: center;
+    font-weight: bold;
+}
+
+//body table {
+//    width: 100%;
+//}
+
+body {
+    width: 800px;
+    margin: auto;
+    padding: 0;
+    //background: #dcdcdc;
+}
+
+#map {
+    width: 650px;
+    height: 350px;
+}
+
+#game_div {
+    width: 1500px;
+    float: right;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.slider-width
+{
+    width: 600px;
+    //background: #ff0000;
+    background-color: red;
+    //background: red;
+    background: 'rgb(255,0,0)';
+    color:#ff0000;
+}

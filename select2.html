@@ -1,0 +1,142 @@
+<html>
+<head>
+    <title>AstroScope Settings</title>
+    <link rel="stylesheet" type="text/css" href="dropdown.css">
+    <link rel="stylesheet" type="text/css" href="home.css">
+    <script type="text/javascript" src="lib/jquery.js"></script>
+    <script type="text/javascript" src="lib/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/header.js"></script>
+
+    <script type="text/javascript">
+        var chart1, chart2;
+        var charts = [];
+        
+        $(document).ready(function() {
+            var LoggedCookie = $.cookie("asLogged");
+            if (LoggedCookie == 1) {
+                $.getJSON("/list", function(data) {
+                    $.each(data, function(key, val) {
+
+                        var chart = {
+                            chartId: val.chart_id,
+                            chartName: val.chart_name,
+                            lat: val.latitude,
+                            long: val.longitude,
+                            utc: val.utc_datetime,
+                            tz: val.tz
+                        };
+                        charts.push(chart);
+                        
+                        var option1 = new Option(chart.chartName, charts.length-1);
+                        var option2 = new Option(chart.chartName, charts.length-1);
+                        $('#partner1').append(option1);
+                        $('#partner2').append(option2);
+                    });
+                });
+            } else {
+                $('#messageId').text("You need to be logged in, in order to select partners.");
+            }
+            
+        });
+        
+        function select1() {
+            var chartIdx = $('#partner1 option:selected').val();
+            chart1 = charts[chartIdx];
+        }
+        
+        function select2() {
+            var chartIdx = $('#partner2 option:selected').val();
+            chart2 = charts[chartIdx];
+        }
+        
+        function synastryClicked() {
+            var loggedCookie = $.cookie("asLogged");
+            chartsToCookie();
+            window.location.href = "/synastry.html";
+            return false;
+        }
+
+        function compositeClicked() {
+            var loggedCookie = $.cookie("asLogged");
+            chartsToCookie();
+            window.location.href = "/composite.html";
+            return false;
+        }
+        
+        function chartsToCookie() {
+            console.log('chart1: ', chart1, ', chart2: ', chart2);
+            
+            $.cookie("chartId", chart1.chartI);
+            $.cookie("chartName", chart1.chartName);
+            $.cookie("lat", chart1.lat);
+            $.cookie("long", chart1.long);
+            $.cookie("utc", chart1.utc);
+            $.cookie("tz", chart1.tz);
+
+            $.cookie("chartId2", chart2.chartId);
+            $.cookie("chartName2", chart2.chartName);
+            $.cookie("lat2", chart2.lat);
+            $.cookie("long2", chart2.long);
+            $.cookie("utc2", chart2.utc);
+            $.cookie("tz2", chart2.tz);
+        }
+
+    </script>
+</head>
+
+<body>
+    <table id="headerId">
+        <tr>
+            <td colspan="1">
+                <button class="home" id="homeId" 
+                        style="width: 100" onclick="location.href='/'">AstroScope</button>
+            </td>
+            <td><span style="padding-left:140px;"/></td>
+            <td colspan="3"><h1><center id="settings">Select parnters</center></h1></td>
+            <td><span style="padding-left:140px;"/></td>
+            <td><div class="dropdown">
+                <button onclick="dropdownClicked()" class="dropbtn" id="ddMenuId" 
+                    style="width: 200">Login</button>
+                <div id="menuId" class="dropdown-content">
+                    <a id="menuChartListId" href="/list.html">Chart List</a>
+                    <a id="menuChartListId" href="/select2.html">Match partners</a>
+                    <a id="menuSettingsId" href="/settings.html">Settings</a>
+                    <a id="menuLogoutId" onclick="logClicked(true)" href="#">Logout</a>
+                </div>
+            </div></td>
+            <td></td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td colspan="4" style="color:red" id="messageId"></td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+    </table>
+    
+    <form action="match" method="post">
+        <table>
+            <tr><td><span style="padding-left:140px;"/></td></tr>
+            <tr>
+                <td><center>Partner 1</center></td>
+                <td><select name="partner1" id="partner1" onchange="select1()"></td>
+                <td><center>Partner 2</center></td>
+                <td><select name="partner2" id="partner2" onchange="select2()"></td>
+            </tr>
+            <tr><td>&nbsp;</td></tr>
+            <tr><td>&nbsp;</td></tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td><input type="button" style="height:30px;width:140px;"
+                    value="Synastry chart" id="synastryId"
+                    onclick="synastryClicked()"></td>
+                <td><span style="padding-left:140px;"/></td>
+                <td><input type="button" style="height:30px;width:140px;"
+                    value="Composit chart" id="compositId"
+                    onclick="compositeClicked()"></td>
+            </tr>
+            <tr><td>&nbsp;</td></tr>
+        </table>
+    </form>
+</body>
+</html>
